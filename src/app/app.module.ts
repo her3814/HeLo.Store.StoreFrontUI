@@ -11,11 +11,20 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { HttpClientModule } from '@angular/common/http';
 import {MatBadgeModule} from '@angular/material/badge';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { ConocenosComponent } from './conocenos/conocenos.component';
+import { ContactoComponent } from './contacto/contacto.component';
+import { FaqComponent } from './faq/faq.component';
+import {  MatRippleModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    NotFoundComponent,
+    ConocenosComponent,
+    ContactoComponent,
+    FaqComponent
   ],
   imports: [
     BrowserModule,
@@ -25,7 +34,7 @@ import {MatBadgeModule} from '@angular/material/badge';
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     MatIconModule,
     MatButtonModule,
-    MatBadgeModule
+    MatBadgeModule, MatRippleModule
     ],
   providers: [],
   bootstrap: [AppComponent]

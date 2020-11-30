@@ -9,12 +9,17 @@ import { map, catchError } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class CategoriasService {
+
   private categorias: Categoria[] | null;
-  private csv: string | null;
 
   constructor(private _http: HttpClient) {
-    this.csv = null;
     this.categorias = null;
+  }
+
+  obtener(codigo: string): Promise<Categoria | null> {
+    return this.obtenerTodo().then(categorias => {
+      return new Promise(res => res(categorias.find(c => c.codigo == codigo)));
+    })
   }
 
   obtenerTodo(): Promise<Categoria[]> {
@@ -27,9 +32,9 @@ export class CategoriasService {
       map(data => {
 
         this.categorias = new Array<Categoria>();
-        
+
         var filas: string[] = data.split('\n');
-        
+
         filas.forEach((fila, index) => {
           if (index > 0) {
             var columnas: string[] = fila.split(',');
@@ -48,23 +53,23 @@ export class CategoriasService {
     ).toPromise<Categoria[]>();
   }
 
-  obtener(cantPagina: number, pagina: number): Promise<Busqueda<Categoria>> {
-      return this.obtenerTodo().then(data => {
-        return new Promise((res) => {
-          var busRes: Busqueda<Categoria> = {
-            cantidadPorPagina: cantPagina,
-            pagina: pagina,
-            resultadoBusqueda: data.filter((_, idx) => {
-              return idx >= (pagina - 1) * cantPagina && idx < (pagina * cantPagina);
-            }),
-            cantidad: data!.filter((_, idx) => {
-              idx >= (pagina - 1) * cantPagina && idx < (pagina * cantPagina)
-            }).length,
-            total: data.length,
-            totalPaginas: Math.ceil(data.length / cantPagina)
-          };
-          res(busRes);
-        });
+  obtenerCategorias(cantPagina: number, pagina: number): Promise<Busqueda<Categoria>> {
+    return this.obtenerTodo().then(data => {
+      return new Promise((res) => {
+        var busRes: Busqueda<Categoria> = {
+          cantidadPorPagina: cantPagina,
+          pagina: pagina,
+          resultadoBusqueda: data.filter((_, idx) => {
+            return idx >= (pagina - 1) * cantPagina && idx < (pagina * cantPagina);
+          }),
+          cantidad: data!.filter((_, idx) => {
+            idx >= (pagina - 1) * cantPagina && idx < (pagina * cantPagina)
+          }).length,
+          total: data.length,
+          totalPaginas: Math.ceil(data.length / cantPagina)
+        };
+        res(busRes);
       });
-    }
+    });
   }
+}
