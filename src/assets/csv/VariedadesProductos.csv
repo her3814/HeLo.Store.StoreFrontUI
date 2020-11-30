@@ -1,0 +1,28 @@
+codigoProducto,codigoVariedad,nombre,costo
+TAP,TSI,Taco Simple,120
+TAP,TFR,Taco con Fritas,200
+TAC,TSI,Taco Simple,120
+TAC,TFR,Taco con Fritas,200
+TAV,TSI,Taco Simple,120
+TAV,TFR,Taco con Fritas,200
+EMC,EMU,Unidad,30
+EMC,EMM,Media Docena,160
+EMC,EMD,Docena,240
+EMP,EMU,Unidad,30
+EMP,EMM,Media Docena,160
+EMP,EMD,Docena,240
+EMJ,EMU,Unidad,30
+EMJ,EMM,Media Docena,160
+EMJ,EMD,Docena,240
+EMV,EMU,Unidad,30
+EMV,EMM,Media Docena,160
+EMV,EMD,Docena,240
+PIC,,,300
+PIS,,,220
+PIK,,,320
+BGR,,,240
+BJA,,,240
+BAS,,,280
+BSI,,,220
+FRS,,,70
+FRD,,,180

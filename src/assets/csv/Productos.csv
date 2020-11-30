@@ -1,0 +1,17 @@
+IdCategoria,IdProducto,nombre,imagenUrl,descripcion,minAgregados,maxAgregados
+TAC,TAP,Taco de Pollo,productos/TACTAP.jpg,Lorem ipsum gruagrrobgo<aegbhrfoea euiwhEOWL UWfeogf,0,3
+TAC,TAC,Taco de Carne,productos/TACTAC.jpg,Lorem ipsum gruagrrobgo<aegbhrfoea euiwhEOWL UWfeogf,0,3
+TAC,TAV,Taco Veggie,productos/TACTAV.jpg,Lorem ipsum gruagrrobgo<aegbhrfoea euiwhEOWL UWfeogf,0,3
+EMP,EMC,Empanadas de Carne,productos/EMPEMC.jpg,Lorem ipsum gruagrrobgo<aegbhrfoea euiwhEOWL UWfeogf,0,0
+EMP,EMP,Empanadas de Pollo,productos/EMPEMP.jpg,Lorem ipsum gruagrrobgo<aegbhrfoea euiwhEOWL UWfeogf,0,0
+EMP,EMJ,Empanadas de JyQ,productos/EMPEMJ.jpg,Lorem ipsum gruagrrobgo<aegbhrfoea euiwhEOWL UWfeogf,0,0
+EMP,EMV,Empanadas de Verdura,productos/EMPEMV.jpg,Lorem ipsum gruagrrobgo<aegbhrfoea euiwhEOWL UWfeogf,0,0
+PIZ,PIS,Pizza Simple,productos/PIZPIS.jpg,Lorem ipsum gruagrrobgo<aegbhrfoea euiwhEOWL UWfeogf,0,0
+PIZ,PIC,Pizza Completa,productos/PIZPIC.jpg,Lorem ipsum gruagrrobgo<aegbhrfoea euiwhEOWL UWfeogf,0,0
+PIZ,PIK,Pizza Calabresa,productos/PIZPIK.jpg,Lorem ipsum gruagrrobgo<aegbhrfoea euiwhEOWL UWfeogf,0,0
+BUR,BGR,Burger Granjita,productos/BURBGR.jpg,Lorem ipsum gruagrrobgo<aegbhrfoea euiwhEOWL UWfeogf,0,3
+BUR,BJA,Burger Jaque,productos/BURBJA.jpg,Lorem ipsum gruagrrobgo<aegbhrfoea euiwhEOWL UWfeogf,0,3
+BUR,BAS,Burger Doble AS,productos/BURBAS.jpg,Lorem ipsum gruagrrobgo<aegbhrfoea euiwhEOWL UWfeogf,0,3
+BUR,BSI,Burger Simple,productos/BURBSI.jpg,Lorem ipsum gruagrrobgo<aegbhrfoea euiwhEOWL UWfeogf,0,3
+FRI,FRS,Papas Fritas Simples,productos/FRIFRS.jpg,Lorem ipsum gruagrrobgo<aegbhrfoea euiwhEOWL UWfeogf,0,0
+FRI,FRD,Papas Fritas Dobles,productos/FRIFRD.jpg,Lorem ipsum gruagrrobgo<aegbhrfoea euiwhEOWL UWfeogf,0,0

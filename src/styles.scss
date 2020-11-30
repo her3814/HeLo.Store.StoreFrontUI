@@ -1,1 +1,56 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+html, body { height: 100%; margin:0; padding:0; background-color: #F7F7F7;}
+body { 
+    margin: 0; 
+    padding:0; 
+     }
+
+     
+.popup {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(255, 255, 255, 0.3);
+    display: flex;
+
+    * ul {
+        display: flex;
+        flex-direction: column;
+        padding: 0;
+
+        li {
+            list-style-type: none;
+        }
+    }
+}
+.popup-bg{
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    right: 0;
+    position: fixed;
+    z-index: 1;
+}
+
+.popup-content{
+    z-index: 2;
+}
+
+.popup-animated {
+    transition: all 0.1s ease-in-out;
+    opacity: 0.8;
+    transform: scale(0);
+    border-radius: 50%;
+}
+
+.popup-active {
+    opacity: 1;
+    transform: scale(1);
+    backdrop-filter: blur(40px);
+    border-radius: 0%;
+}

@@ -1,0 +1,55 @@
+<div class="tienda-componente">
+
+    <div class="categorias">
+        <ul>
+            <li (click)="cambiarCategoria(undefined)" [class.active]="categoriaSeleccionada==undefined">Todos</li>
+            <li (click)="cambiarCategoria(cat)"
+                [class.active]="categoriaSeleccionada && categoriaSeleccionada.codigo==cat.codigo"
+                *ngFor="let cat of categoriasEncabezado">{{cat.nombre}}</li>
+            <li (click)="mostrarCategorias=true">+</li>
+        </ul>
+    </div>
+
+    <div class="productos">
+        <div matRiple *ngFor="let producto of productos" class="producto" (click)="cambiarProducto(producto)">
+            <img src="assets/icons/icon-72x72.png" alt="" class="foto-producto">
+            <h1>{{producto.nombre}}</h1>
+            <p>{{producto.descripcion}}</p>
+            <span>{{producto.costoMinimo==producto.costoMaximo ? '$' + producto.costoMinimo : '$' +producto.costoMinimo + ' - ' + '$' +producto.costoMaximo}}</span>
+        </div>
+    </div>
+
+</div>
+
+
+<div class="popup popup-animated" [class.popup-active]="mostrarCategorias">
+    <div class="popup-bg" (click)="mostrarCategorias=false"></div>
+    <div class="popup-content categoria-popup">
+        <h1>Categorias</h1>
+        <ul>
+            <li (click)="cambiarCategoria(undefined);  mostrarCategorias=false">Todo</li>
+            <li (click)="cambiarCategoria(cat); mostrarCategorias=false" *ngFor="let cat of categorias">{{cat.nombre}}</li>
+        </ul>
+    </div>
+</div>
+
+<div class="popup popup-animated" [class.popup-active]="productoSeleccionado" >
+    <div class="popup-bg" (click)="cambiarProducto(undefined)"></div>
+    <div class="popup-content producto-popup">
+        <div class="producto-info">
+            <img src="{{productoSeleccionado?.imagenUrl}}" alt="Imagen {{productoSeleccionado?.nombre}}">
+            <h1>{{productoSeleccionado?.nombre}}</h1>
+                <p>{{productoSeleccionado?.descripcion}}</p>
+
+                <ul *ngIf="variedadesProducto ? variedadesProducto!.length>1 : false">
+                    <li *ngFor="let variedad of variedadesProducto">
+                        <span class="texto-nombre">{{variedad.nombre}}</span>
+                        <span class="texto-costo">${{variedad.costo}}</span>
+                        <mat-icon class="button-remove" (click)="quitarVariedad(variedad)">remove_circle</mat-icon>
+                        <span class="counter">{{cantidadItem(variedad)}}</span>
+                        <mat-icon class="button-add" (click)="agregarVariedad(variedad)">add_circle</mat-icon>
+                    </li>
+                </ul>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,13 @@
+<h1 class="mat-h1">Pedido</h1>
+
+<ul *ngIf="pedido && pedido.size > 0">
+    <li *ngFor="let item of pedido!.keys()">
+        <span>
+            holi
+            {{item.nombre}}
+        </span>
+        <span>
+            {{pedido!.get(item)}}
+        </span>
+    </li>
+</ul>
