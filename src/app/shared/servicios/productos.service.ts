@@ -18,6 +18,12 @@ export class ProductosService {
     this.variedadesProductos = null;
   }
 
+  obtenerProducto(codigo: string): Promise<Producto | undefined> {
+    return this.cargarProductos().then(prod => {
+      return new Promise(res => res(prod.find(p => p.codigo == codigo)));
+    })
+  }
+
   obtenerVariedad(codigoProducto: string, codigoVariedad: string): Promise<ProductoVariedad> {
     return this.cargarProductosVariedades().then(variedades => {
       return new Promise(res => {

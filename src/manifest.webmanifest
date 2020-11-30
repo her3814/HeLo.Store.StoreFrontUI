@@ -1,8 +1,8 @@
 {
-  "name": "StoreFront",
-  "short_name": "StoreFront",
-  "theme_color": "#1976d2",
-  "background_color": "#fafafa",
+  "name": "Al Paso | Fast-Food - Almuerzos - Postres",
+  "short_name": "Al Paso",
+  "theme_color": "#ff6600",
+  "background_color": "#f7f7f7",
   "display": "standalone",
   "scope": "./",
   "start_url": "./",

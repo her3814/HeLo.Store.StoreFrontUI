@@ -5,6 +5,7 @@ import { TiendaRoutingModule } from './tienda-routing.module';
 import { TiendaComponent } from './tienda.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatRippleModule } from '@angular/material/core';
+import {MatCardModule} from '@angular/material/card';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { MatRippleModule } from '@angular/material/core';
     CommonModule,
     TiendaRoutingModule,
     MatIconModule,
-    MatRippleModule
+    MatRippleModule,
+    MatCardModule
   ]
 })
 export class TiendaModule { }

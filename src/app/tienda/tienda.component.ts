@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Busqueda } from '../shared/clases/busqueda';
 import { Categoria } from '../shared/clases/categoria';
 import { Producto } from '../shared/clases/producto';
 import { ProductoVariedad } from '../shared/clases/producto-variedad';
@@ -23,18 +25,35 @@ export class TiendaComponent implements OnInit {
 
   public mostrarCategorias: boolean = false;
 
-
-
-  constructor(private categoriasSvc: CategoriasService, private productosSvc: ProductosService, private pedidoSvc: PedidoService) {
+  constructor(private categoriasSvc: CategoriasService, private productosSvc: ProductosService, private pedidoSvc: PedidoService, private _actRoute: ActivatedRoute) {
 
   }
 
   ngOnInit(): void {
-    this.categoriasSvc.obtener(4, 1).then(res => {
-      this.categoriasSvc.obtenerTodo().then(res => this.categorias = res);
+    this.categoriasSvc.obtenerCategorias(4, 1).then(res => {
+      this.categoriasSvc.obtenerTodo().then(res => {
+        this.categorias = res;
+        this._actRoute.queryParamMap.subscribe(params => {
+          console.log(params);
+          if (params.has('producto')) {
+            this.productosSvc.obtenerProducto(params.get('producto')!).then(p => this.cambiarProducto(p));
+          } else this.cambiarProducto(undefined);
+
+          if (params.has('showCategorias')) {
+            this.mostrarCategorias = (/true/i).test(params.get('showCategorias')!);
+          } else {
+            this.mostrarCategorias = false; 
+            if (params.has('categoria')) {
+              this.cambiarCategoria(res.find(c => c.codigo == params.get('categoria')!))
+            } else this.cambiarCategoria(undefined);
+
+          }
+        })
+      });
 
       this.categoriasEncabezado = res.resultadoBusqueda;
-    }).then(_ => { this.cambiarCategoria(undefined); });
+
+    });
   }
 
 
@@ -42,8 +61,8 @@ export class TiendaComponent implements OnInit {
     this.categoriaSeleccionada = categoria;
     this.productosSvc.obtenerProductos(5, 1, categoria).then(p => {
       this.productos = p.resultadoBusqueda;
-    }); 
-  } 
+    });
+  }
 
   cambiarProducto(producto: Producto | undefined) {
     if (producto) {
