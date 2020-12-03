@@ -1,13 +1,39 @@
-<h1 class="mat-h1">Pedido</h1>
+<h1 class="mat-h1" *ngIf="pedido">Pedido</h1>
+<div class="pedido-detalle" *ngIf="pedido">
+    <div *ngFor="let producto of cabecerasProducto" class="producto">
+        <div class="nombre-producto mat-h2">{{producto.nombre}}</div>
+        <div *ngFor="let detalle of itemVariedades(producto)" class="producto-detalle">
 
-<ul *ngIf="pedido && pedido.size > 0">
-    <li *ngFor="let item of pedido!.keys()">
-        <span>
-            holi
-            {{item.nombre}}
-        </span>
-        <span>
-            {{pedido!.get(item)}}
-        </span>
-    </li>
-</ul>
+            <div class="detalle-nombre mat-h3">{{detalle.nombre}} </div>
+            <div class="detalle-costo-unidad caption">Costo Unitario: ${{detalle.costo}}</div>
+
+            <div class="detalle-cantidad">
+                <mat-icon matRipple color="accent" (click)="agregarItem(detalle)"
+                    title="Agregar una unidad de {{producto.nombre}} -  {{detalle.nombre}}">                   
+                        add_circle
+                    </mat-icon>
+                <span>
+                    {{detalle.cantidad}}
+                </span>
+                <mat-icon matRipple color="warn" (click)="quitarItem(detalle)"
+                    title="Restar una unidad de {{producto.nombre}} -  {{detalle.nombre}}">
+                    remove_circle</mat-icon>
+               
+            </div>
+
+            <div class="detalle-subtotal">
+                ${{detalle.cantidad * detalle.costo}}
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="pedido-subtotal">
+        ${{subTotalPedido}}
+    </div>
+</div>
+
+<div *ngIf="pedido">
+<button (click)="enviarPedido()">Enviar</button>
+</div>

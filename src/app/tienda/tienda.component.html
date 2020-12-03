@@ -2,7 +2,7 @@
 
     <div class="categorias">
         <ul>
-            <li routerLink="" [class.active]="categoriaSeleccionada==undefined">Todos</li>
+            <li routerLink="" [queryParams]="{categoria: ''}" [class.active]="categoriaSeleccionada==undefined">Todos</li>
             <li routerLink="" [queryParams]="{categoria: cat.codigo}"
                 [class.active]="categoriaSeleccionada && categoriaSeleccionada.codigo==cat.codigo"
                 *ngFor="let cat of categoriasEncabezado">{{cat.nombre}}</li>
@@ -33,7 +33,7 @@
     <div class="popup-content categoria-popup">
         <h1>Categorias</h1>
         <ul>
-            <li [class.active]="categoriaSeleccionada==undefined" routerLink="">Todo</li>
+            <li [class.active]="categoriaSeleccionada==undefined" routerLink="" [queryParams]="{categoria: ''}">Todo</li>
             <li [class.active]="categoriaSeleccionada && categoriaSeleccionada!.codigo==cat.codigo" routerLink=""
                 [queryParams]="{categoria: cat.codigo}" *ngFor="let cat of categorias">{{cat.nombre}}
             </li>
@@ -41,22 +41,22 @@
     </div>
 </div>
 
-<div class="popup popup-animated alternative" [class.popup-active]="productoSeleccionado">
-    <div class="popup-bg" (click)="cambiarProducto(undefined)"></div>
+<div class="popup popup-animated" [class.popup-active]="productoSeleccionado">
+    <div class="popup-bg" routerLink="" [queryParams]="{producto : ''}" ></div>
     <div class="popup-content producto-popup">
-        <div class="producto-info alternative">
+        <div class="producto-info">
             <img src="{{productoSeleccionado?.imagenUrl}}" alt="Imagen {{productoSeleccionado?.nombre}}">
             <h1>{{productoSeleccionado?.nombre}}</h1>
             <p>{{productoSeleccionado?.descripcion}}</p>
 
             <ul *ngIf="variedadesProducto">
                 <li *ngFor="let variedad of variedadesProducto">
-                    <span class="texto-nombre" *ngIf="variedadesProducto!.length==1">{{variedad.nombre}}</span>
+                    <span class="texto-nombre" *ngIf="variedadesProducto!.length>1">{{variedad.nombre}}</span>
                     <span class="texto-costo">${{variedad.costo}}</span>
-                    <mat-icon matRipple class="button-remove" (click)="quitarVariedad(variedad)">remove_circle
+                    <mat-icon matRipple class="button-remove" color="warn" (click)="quitarVariedad(variedad)">remove_circle
                     </mat-icon>
                     <span class="counter">{{cantidadItem(variedad)}}</span>
-                    <mat-icon class="button-add" (click)="agregarVariedad(variedad)">add_circle</mat-icon>
+                    <mat-icon class="button-add" color="primary" (click)="agregarVariedad(variedad)">add_circle</mat-icon>
                 </li>
             </ul>
 

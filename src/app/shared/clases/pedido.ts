@@ -1,7 +1,9 @@
 import { Direccion } from './direccion';
-import { ProductoVariedad } from './producto-variedad';
+import { EnvioTipo } from './envio-tipo';
+import { PedidoItem } from './pedido-item';
 
 export interface Pedido {
-    direccionEntrega: Direccion;
-    productos: ProductoVariedad[];   
+    items:PedidoItem[];
+    direccionEntrega: Direccion | undefined;
+    tipoEnvio: EnvioTipo | undefined
 }

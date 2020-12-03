@@ -9,6 +9,7 @@ import { PedidoService } from './shared/servicios/pedido.service';
 })
 export class AppComponent {
   title = 'StoreFront';
+  public pedidoItems: number = 0;
 
   constructor(private iconRegister: MatIconRegistry, sanitizer: DomSanitizer, private pedidoSvc: PedidoService) {
     this.iconRegister.addSvgIcon(
@@ -20,9 +21,6 @@ export class AppComponent {
     this.iconRegister.addSvgIcon(
       'instagram',
       sanitizer.bypassSecurityTrustResourceUrl('assets/logos/logo-instagram.svg'));
-
-  }
-  get pedidoItems(): number {
-    return this.pedidoSvc.cantidadItems;
+    this.pedidoSvc.cantidadItems.subscribe(n => this.pedidoItems = n);
   }
 }

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Busqueda } from '../shared/clases/busqueda';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Categoria } from '../shared/clases/categoria';
 import { Producto } from '../shared/clases/producto';
 import { ProductoVariedad } from '../shared/clases/producto-variedad';
@@ -25,27 +24,37 @@ export class TiendaComponent implements OnInit {
 
   public mostrarCategorias: boolean = false;
 
-  constructor(private categoriasSvc: CategoriasService, private productosSvc: ProductosService, private pedidoSvc: PedidoService, private _actRoute: ActivatedRoute) {
+  constructor(private categoriasSvc: CategoriasService, private productosSvc: ProductosService, private pedidoSvc: PedidoService, private _actRoute: ActivatedRoute, private _router:Router) {
 
   }
 
   ngOnInit(): void {
+    this.cambiarCategoria(undefined);
     this.categoriasSvc.obtenerCategorias(4, 1).then(res => {
       this.categoriasSvc.obtenerTodo().then(res => {
         this.categorias = res;
         this._actRoute.queryParamMap.subscribe(params => {
-          console.log(params);
+
           if (params.has('producto')) {
-            this.productosSvc.obtenerProducto(params.get('producto')!).then(p => this.cambiarProducto(p));
-          } else this.cambiarProducto(undefined);
+            if (params.get('producto') == ''){
+              this.cambiarProducto(undefined);
+            }
+            else this.productosSvc.obtenerProducto(params.get('producto')!).then(p => this.cambiarProducto(p));
+          }
+
+          if (params.has('categoria')) {
+            if (params.get('categoria') == '')
+              this.cambiarCategoria(undefined);
+            else
+              this.cambiarCategoria(res.find(c => c.codigo == params.get('categoria')!))
+          }
+
 
           if (params.has('showCategorias')) {
             this.mostrarCategorias = (/true/i).test(params.get('showCategorias')!);
           } else {
-            this.mostrarCategorias = false; 
-            if (params.has('categoria')) {
-              this.cambiarCategoria(res.find(c => c.codigo == params.get('categoria')!))
-            } else this.cambiarCategoria(undefined);
+            this.mostrarCategorias = false;
+
 
           }
         })
@@ -76,7 +85,6 @@ export class TiendaComponent implements OnInit {
       this.variedadesProducto = undefined;
     }
   }
-
 
   agregarVariedad(item: ProductoVariedad) {
     this.pedidoSvc.agregarProductoVariedad(item);

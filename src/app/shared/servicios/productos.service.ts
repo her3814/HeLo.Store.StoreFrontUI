@@ -123,7 +123,6 @@ export class ProductosService {
     )
   }
 
-
   private cargarProductosVariedades(): Promise<ProductoVariedad[]> {
     if (this.variedadesProductos) {
       return new Promise((res) => {
@@ -144,8 +143,8 @@ export class ProductosService {
               {
                 codigoProducto: columnas[0],
                 codigoVariedad: columnas[1],
+                nombre: columnas[2],
                 costo: Number.parseInt(columnas[3]),
-                nombre: columnas[2]
               });
           }
         });

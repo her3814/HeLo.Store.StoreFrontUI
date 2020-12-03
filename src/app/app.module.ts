@@ -32,9 +32,10 @@ import {  MatRippleModule } from '@angular/material/core';
     AppRoutingModule,
     BrowserAnimationsModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
-    MatIconModule,
     MatButtonModule,
-    MatBadgeModule, MatRippleModule
+    MatBadgeModule, 
+    MatRippleModule,
+    MatIconModule,
     ],
   providers: [],
   bootstrap: [AppComponent]
