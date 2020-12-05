@@ -6,15 +6,16 @@
             <li routerLink="" [queryParams]="{categoria: cat.codigo}"
                 [class.active]="categoriaSeleccionada && categoriaSeleccionada.codigo==cat.codigo"
                 *ngFor="let cat of categoriasEncabezado">{{cat.nombre}}</li>
-            <li routerLink="" [queryParams]="{showCategorias: true}">+</li>
+            <li routerLink="" [queryParams]="{showCategorias: true}">+ Más</li>
         </ul>
     </div>
 
     <div class="productos">
-        <mat-card class="producto" *ngFor="let producto of productos" routerLink=""
+        <p class="mat-h1" *ngIf="categoriaSeleccionada">{{categoriaSeleccionada!.nombre}}</p>
+        <mat-card class="producto slide-top" *ngFor="let producto of productos" routerLink=""
             [queryParams]="{producto: producto.codigo}">
             <div matRipple>
-                <img src="assets/icons/icon-72x72.png" alt="" class="foto-producto">
+                <img src="assets/icons/icon-72x72.png"  alt="" class="foto-producto">
                 <p class="prod-nombre mat-title">{{producto.nombre}}</p>
                 <p class="prod-detalle mat-body">{{producto.descripcion}}</p>
                 <p class="prod-precio mat-subheading-2">
@@ -22,7 +23,8 @@
                 </p>
             </div>
         </mat-card>
-        <h1 *ngIf="productos == undefined ? 'true' : productos.length==0">Actualmente no contamos con stock de {{categoriaSeleccionada?.codigo}}</h1>
+        <button mat-button color="primary" class="caption text-center" *ngIf="ultimaBusquedaProductos && ultimaBusquedaProductos!.pagina < ultimaBusquedaProductos!.totalPaginas" (click)="cargarMasProductos()">Cargar más productos</button>
+        <p class="mat-h2"  *ngIf="productos == undefined ? 'true' : productos.length==0">Actualmente no contamos con stock de {{categoriaSeleccionada?.nombre}}</p>
     </div>
 
 </div>
@@ -53,20 +55,15 @@
                 <li *ngFor="let variedad of variedadesProducto">
                     <span class="texto-nombre" *ngIf="variedadesProducto!.length>1">{{variedad.nombre}}</span>
                     <span class="texto-costo">${{variedad.costo}}</span>
-                    <mat-icon matRipple class="button-remove" color="warn" (click)="quitarVariedad(variedad)">remove_circle
-                    </mat-icon>
+                    
+                    <button mat-icon-button class="button-remove" color="warn" (click)="quitarVariedad(variedad)">
+                        <mat-icon>
+                            remove_circle
+                        </mat-icon>
+                    </button>
                     <span class="counter">{{cantidadItem(variedad)}}</span>
-                    <mat-icon class="button-add" color="primary" (click)="agregarVariedad(variedad)">add_circle</mat-icon>
-                </li>
-            </ul>
 
-            <ul *ngIf="variedadesProducto ? variedadesProducto!.length==1 : false">
-                <li *ngFor="let variedad of variedadesProducto">
-                    <span class="texto-costo">${{variedad.costo}}</span>
-                    <mat-icon matRipple class="button-remove" (click)="quitarVariedad(variedad)">remove_circle
-                    </mat-icon>
-                    <span class="counter">{{cantidadItem(variedad)}}</span>
-                    <mat-icon class="button-add" (click)="agregarVariedad(variedad)">add_circle</mat-icon>
+                    <button mat-icon-button class="button-add" color="primary" (click)="agregarVariedad(variedad)"><mat-icon>add_circle</mat-icon></button>
                 </li>
             </ul>
         </div>

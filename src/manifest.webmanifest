@@ -3,7 +3,7 @@
   "short_name": "Al Paso",
   "theme_color": "#ff6600",
   "background_color": "#f7f7f7",
-  "display": "standalone",
+  "display": "fullscreen",
   "scope": "./",
   "start_url": "./",
   "icons": [

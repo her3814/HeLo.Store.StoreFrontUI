@@ -2,8 +2,7 @@ export interface EnvioTipo {
     descripcion: string;
     requiereDomicilio: Boolean;
     costo: number;
-    fecha: Date,
-    tipo: EnvioTipos
+    tipo: EnvioTipos,
 }
 
 export enum EnvioTipos {

@@ -10,14 +10,11 @@ import { ProductosService } from '../shared/servicios/productos.service';
   styleUrls: ['./pedido.component.scss']
 })
 export class PedidoComponent implements OnInit, OnDestroy {
-
-
+ 
   pedido: Pedido | undefined;
   private subscription: Subscription | undefined;
 
-  constructor(private pedidoSvc: PedidoService, private productosSvc: ProductosService) {
-
-  }
+  constructor(private pedidoSvc: PedidoService, private productosSvc: ProductosService) {  }
 
   ngOnDestroy() {
     if (this.subscription)
@@ -40,29 +37,29 @@ export class PedidoComponent implements OnInit, OnDestroy {
   }
 
   agregarItem(item: CabeceraVariedad) {
-    console.log('agregando');
-    console.log(item);
     this.productosSvc.obtenerVariedad(item.codigoProducto, item.codigo).then(variedad => { console.log(variedad); this.pedidoSvc.agregarProductoVariedad(variedad); })
   }
 
   quitarItem(item: CabeceraVariedad) {
-    console.log('agregando');
-    console.log(item);
     this.productosSvc.obtenerVariedad(item.codigoProducto, item.codigo).then(variedad => { this.pedidoSvc.quitarProductoVariedad(variedad) })
   }
 
   get productosKeys(): string[] {
     var keys: Array<string> = new Array<string>();
-    this.pedido?.items.forEach(i => { if ( keys.find(k => k==i.itemCodigoProducto) == undefined) keys.push(i.itemCodigoProducto); });
+    this.pedido?.items.forEach(i => { if (keys.find(k => k == i.itemCodigoProducto) == undefined) keys.push(i.itemCodigoProducto); });
     return keys;
   }
 
   get cabecerasProducto(): CabeceraProducto[] {
     var keys: Array<CabeceraProducto> = new Array<CabeceraProducto>();
-    this.pedido?.items.forEach(i => { if (!keys.find(p => p.codigo==i.itemCodigoProducto)) keys.push({ codigo: i.itemCodigoProducto, nombre: i.itemNombreProducto }); });
+    this.pedido?.items.forEach(i => { if (!keys.find(p => p.codigo == i.itemCodigoProducto)) keys.push({ codigo: i.itemCodigoProducto, nombre: i.itemNombreProducto }); });
     return keys;
   }
 
+  quitarProducto(producto: CabeceraProducto) {
+    this.productosSvc.obtenerProducto(producto.codigo).then(p => { if (p) this.pedidoSvc.quitarProducto(p); });
+  }
+  
   itemVariedades(prod: CabeceraProducto): CabeceraVariedad[] {
     var keys = new Array<CabeceraVariedad>();
 
@@ -86,7 +83,7 @@ export class PedidoComponent implements OnInit, OnDestroy {
     return subTotal;
   }
 
-  enviarPedido(){
+  enviarPedido() {
     this.pedidoSvc.enviarPedido();
   }
 }

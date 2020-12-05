@@ -5,8 +5,10 @@ import { PedidoRoutingModule } from './pedido-routing.module';
 import { PedidoComponent } from './pedido.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { MatRipple, MatRippleModule } from '@angular/material/core';
+import { MatRippleModule } from '@angular/material/core';
+import {MatExpansionModule} from '@angular/material/expansion';
 
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
 
 @NgModule({
   declarations: [PedidoComponent],
@@ -15,7 +17,9 @@ import { MatRipple, MatRippleModule } from '@angular/material/core';
     PedidoRoutingModule,
     MatButtonModule,
     MatIconModule,
-    MatRippleModule
+    MatRippleModule,
+    MatExpansionModule,
+    MatButtonToggleModule
   ]
 })
 export class PedidoModule { }

@@ -9,7 +9,7 @@
 
 // Fonts
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
-@import 'https://fonts.googleapis.com/css?family=Material+Icons';
+@import 'https://fonts.googleapis.com/css?family=Material+Icons&amp;display=swap';
      
 $fontConfig: (
   display-4: mat-typography-level(112px, 112px, 300, 'Noto Sans', -0.0134em),
@@ -219,7 +219,7 @@ $theme: mat-dark-theme($theme-primary, $theme-accent, $theme-warn);
 $altTheme: mat-light-theme($theme-primary, $theme-accent, $theme-warn);
 
 // Theme Init
-@include angular-material-theme($theme);
+@include angular-material-theme($altTheme);
 
 .theme-alternate {
   @include angular-material-theme($altTheme);

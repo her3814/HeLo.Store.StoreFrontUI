@@ -1,0 +1,30 @@
+.cooking-img {
+    margin: auto;
+    padding: 1em;
+    max-width: calc(100% - 2em);
+    display: block;
+}
+
+.info-comercial {
+    a {
+        text-decoration: none;
+        color: var(--accent-color);
+        font-weight: bold;
+        font-size: medium;
+        padding: 0 0 0.5em;
+        display: block;
+    }
+}
+
+.creditos{
+margin-top: 2em;
+    a {
+        font-variant: small-caps;
+        text-decoration: none;
+    color: var(--text-primary-color);
+    //font-weight: bold;
+    //font-size: medium;
+    padding: 0 0 0.5em;
+    display: block;
+}
+}

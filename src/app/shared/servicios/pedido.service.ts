@@ -5,6 +5,9 @@ import { Pedido } from '../clases/pedido';
 import { ProductosService } from '../servicios/productos.service';
 import { PedidoItem } from '../clases/pedido-item';
 import { environment } from 'src/environments/environment';
+import { Producto } from '../clases/producto';
+import { UtilsService } from './utils.service';
+import { Direccion } from '../clases/direccion';
 
 @Injectable({
   providedIn: 'root'
@@ -18,26 +21,26 @@ export class PedidoService {
   private _cantidadItems: BehaviorSubject<number>;
   public cantidadItems: Observable<number>;
 
-  constructor(private productosSvc: ProductosService) {
+  constructor(private productosSvc: ProductosService, private _utils: UtilsService) {
 
     this._pedido = new BehaviorSubject<Pedido | null>(null);
     this.pedido = this._pedido.asObservable();
 
     this._cantidadItems = new BehaviorSubject<number>(0);
-    
-    this._pedido.subscribe(_ => {
-      this.actualizarDatos();
-      this.calcularCantidadItems();
-    });    
-    
+
+
     this.cantidadItems = this._cantidadItems.asObservable();
 
     if (window.sessionStorage) {
       this.cargarDatos();
     } else this.inicializarPedido();
 
+    this._pedido.subscribe(_ => {
+      this.actualizarDatos();
+      this.calcularCantidadItems();
+    });
 
-  
+
   }
 
   private inicializarPedido() {
@@ -49,19 +52,17 @@ export class PedidoService {
   }
 
   private cargarDatos() {
-    var pedidoCache = window.sessionStorage.getItem('pedido');
-    if (!pedidoCache || pedidoCache == null|| pedidoCache == "null")
+    var pedidoCache = window.localStorage.getItem('pedido');
+    if (!pedidoCache || pedidoCache == null || pedidoCache == "null")
       this.inicializarPedido();
     else {
-      console.log("Encontre pedido en SessionStorage.");
-      console.log(pedidoCache);
       this._pedido.next(JSON.parse(pedidoCache) as Pedido);
     }
   }
 
   private actualizarDatos() {
-    if (window.sessionStorage) {
-      window.sessionStorage.setItem('pedido', JSON.stringify(this._pedido.value))
+    if (window.localStorage) {
+      window.localStorage.setItem('pedido', JSON.stringify(this._pedido.value))
     }
   }
 
@@ -80,15 +81,31 @@ export class PedidoService {
     this.inicializarPedido();
   }
 
+  quitarProducto(producto: Producto) {
+    var pedido = this._pedido.value;
+
+    var itemsPedido = pedido!.items.filter(i => i.itemCodigoProducto == producto.codigo);
+
+    if (itemsPedido) {
+      itemsPedido.forEach(itemPedido => {
+        pedido!.items.splice(pedido!.items.indexOf(itemPedido), 1);
+      })
+    };
+
+    this._pedido.next(pedido);
+  }
+
   quitarProductoVariedad(item: ProductoVariedad) {
     var pedido = this._pedido.value;
 
     var itemPedido = pedido!.items.find(i => i.itemCodigoProducto == item.codigoProducto && i.itemCodigoVariedad == item.codigoVariedad);
-   
-   console.log(item);
-   console.log(itemPedido);
-    if (itemPedido && itemPedido.itemCantidad > 0) {
+
+    if (itemPedido && itemPedido.itemCantidad > 1) {
+      this._utils.openSnackBar("Se quitó " + item.nombre + " a tu pedido", '');
       itemPedido.itemCantidad--;
+    } else if (itemPedido && itemPedido.itemCantidad == 1) {
+      this._utils.openSnackBar("Se quitó " + item.nombre + " a tu pedido", '');
+      pedido!.items.splice(pedido!.items.indexOf(itemPedido), 1);
     };
 
     this._pedido.next(pedido);
@@ -111,6 +128,7 @@ export class PedidoService {
     if (pedidoItem) {
       pedido!.items[pedido!.items.indexOf(pedidoItem)].itemCantidad++;
       this._pedido.next(pedido);
+      this._utils.openSnackBar("Se agregó " + item.nombre + " a tu pedido", '');
     }
     else {
       this.productosSvc.obtenerProducto(item.codigoProducto).then(p => {
@@ -125,10 +143,20 @@ export class PedidoService {
               itemNombreVariedad: item.nombre
             });
           this._pedido.next(pedido);
+          this._utils.openSnackBar("Se agregó " + item.nombre + " a tu pedido", '');
         }
         else throw new Error("El producto que intenta agregar no existe.");
       });
     }
+  }
+
+  guardarDireccion(direccion: Direccion | undefined) {
+    if (this._pedido.value) {
+      var pedido = this._pedido.value;
+      pedido.direccionEntrega = direccion;
+      this._pedido.next(pedido);
+    }
+
   }
 
   enviarPedido() {

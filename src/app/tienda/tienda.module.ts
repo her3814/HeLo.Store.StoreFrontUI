@@ -6,6 +6,7 @@ import { TiendaComponent } from './tienda.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatRippleModule } from '@angular/material/core';
 import {MatCardModule} from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import {MatCardModule} from '@angular/material/card';
     TiendaRoutingModule,
     MatIconModule,
     MatRippleModule,
-    MatCardModule
+    MatCardModule,
+    MatButtonModule
   ]
 })
 export class TiendaModule { }

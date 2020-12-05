@@ -1,39 +1,90 @@
-<h1 class="mat-h1" *ngIf="pedido">Pedido</h1>
-<div class="pedido-detalle" *ngIf="pedido">
-    <div *ngFor="let producto of cabecerasProducto" class="producto">
-        <div class="nombre-producto mat-h2">{{producto.nombre}}</div>
-        <div *ngFor="let detalle of itemVariedades(producto)" class="producto-detalle">
+<h1 class="mat-h1">Pedido</h1>
 
-            <div class="detalle-nombre mat-h3">{{detalle.nombre}} </div>
-            <div class="detalle-costo-unidad caption">Costo Unitario: ${{detalle.costo}}</div>
 
-            <div class="detalle-cantidad">
-                <mat-icon matRipple color="accent" (click)="agregarItem(detalle)"
-                    title="Agregar una unidad de {{producto.nombre}} -  {{detalle.nombre}}">                   
+<div *ngIf="!pedido || pedido!.items!.length == 0">
+    <p class="mat-h2 text-center">Tu pedido está vacio. Entra a la tienda y busca alguna delicia para encargar 😜
+    </p>
+</div>
+
+<mat-accordion>
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                <span class="text-right" style="font-weight: bold;">
+                    Detalle de Pedido
+                </span>
+            </mat-panel-title>
+
+            <mat-panel-description>
+                <p class="text-right">
+                    Subtotal: ${{subTotalPedido}}
+                </p>
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <ng-container *ngTemplateOutlet="pedidoDetalle"></ng-container>
+
+    </mat-expansion-panel>
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                <p style="font-weight: bold;">
+                    Modo de Entrega
+                </p>
+            </mat-panel-title>
+            <mat-panel-description>
+                A Domicilio&nbsp;<mat-icon>home</mat-icon>
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+        <ng-container *ngTemplateOutlet="metodoEntrega"></ng-container>
+    </mat-expansion-panel>
+</mat-accordion>
+
+<ng-template #metodoEntrega> 
+    <button mat-button>Holi</button>
+    <button mat-button>Holi</button>
+
+</ng-template>
+
+
+<ng-template #pedidoDetalle>
+    <div class="pedido-detalle" *ngIf="pedido && pedido.items.length > 0">
+        <div *ngFor="let producto of cabecerasProducto" class="producto">
+            <div class="nombre-producto mat-h2">{{producto.nombre}}
+                <mat-icon matRipple (click)="quitarProducto(producto)">delete</mat-icon>
+
+            </div>
+            <div *ngFor="let detalle of itemVariedades(producto)" class="producto-detalle">
+                <div class="detalle-descripcion">
+                    <div class="detalle-nombre mat-h3">{{detalle.nombre}} </div>
+                    <div class="detalle-costo-unidad caption">Costo Unitario: ${{detalle.costo}}</div>
+
+                </div>
+
+                <div class="detalle-cantidad">
+                    <mat-icon matRipple color="accent" (click)="agregarItem(detalle)"
+                        title="Agregar una unidad de {{producto.nombre}} -  {{detalle.nombre}}">
                         add_circle
                     </mat-icon>
-                <span>
-                    {{detalle.cantidad}}
-                </span>
-                <mat-icon matRipple color="warn" (click)="quitarItem(detalle)"
-                    title="Restar una unidad de {{producto.nombre}} -  {{detalle.nombre}}">
-                    remove_circle</mat-icon>
-               
+                    <span>
+                        {{detalle.cantidad}}
+                    </span>
+                    <mat-icon matRipple color="warn" (click)="quitarItem(detalle)"
+                        title="Restar una unidad de {{producto.nombre}} -  {{detalle.nombre}}">
+                        remove_circle</mat-icon>
+
+                </div>
+
+                <div class="detalle-subtotal">
+                    ${{detalle.cantidad * detalle.costo}}
+                </div>
+
             </div>
 
-            <div class="detalle-subtotal">
-                ${{detalle.cantidad * detalle.costo}}
-            </div>
 
         </div>
-
+        <div class="pedido-subtotal mat-h3 text-right">
+            Subtotal del Pedido: ${{subTotalPedido}}
+        </div>
     </div>
-
-    <div class="pedido-subtotal">
-        ${{subTotalPedido}}
-    </div>
-</div>
-
-<div *ngIf="pedido">
-<button (click)="enviarPedido()">Enviar</button>
-</div>
+</ng-template>

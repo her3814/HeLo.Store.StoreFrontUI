@@ -1,35 +1,60 @@
 .pedido-detalle {
+    .producto:first-child {
+        margin-top: 0;
+    }
     .producto {
+        margin-top: 1em;
+
         .nombre-producto {
             border-bottom: solid 1px rgba(0, 0, 0, 0.16);
+            font-weight: bold;
+            margin-bottom: 0;
+
+            mat-icon {
+                float: right;
+            }
         }
 
-        .producto-detalle{
+        .producto-detalle:nth-child(odd) {
+            background-color: rgba(0, 0, 0, 0.12);
+        }
+        .producto-detalle {
             display: grid;
-            grid-template-columns: auto auto auto;
-            grid-template-rows: repeat(2, 1fr);
-            .detalle-nombre{
-                font-weight: bolder!important;
+            grid-template-columns: auto 1fr auto;
+            align-items: center;
+            padding: 0.5em;
+            column-gap: 0.5em;
+
+            .detalle-descripcion {
                 grid-column: 2/3;
                 grid-row: 1/2;
+
+                .detalle-nombre {
+                    font-weight: bolder !important;
+                    margin-bottom: 0;
+                    line-height: initial;
+                    display: block;
+                }
+
+                .detalle-costo-unidad {
+                    display: block;
+                }
             }
 
-            .detalle-costo-unidad{
-                grid-column: 2/3;
-                grid-row: 2/3;
-            }
-
-            .detalle-cantidad{
-                grid-column:1/2;
-                grid-row: 1/4;
+            .detalle-cantidad {
+                grid-column: 1/2;
+                grid-row: 1/2;
                 display: flex;
-                flex-direction: row-reverse;
-                place-items:center;
+                flex-direction: column;
+                place-items: center;
+
+                span {
+                    font-weight: bold;
+                }
             }
 
-            .detalle-subtotal{
+            .detalle-subtotal {
                 grid-column: 3/4;
-                grid-row: 1/4
             }
         }
     }

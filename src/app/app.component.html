@@ -31,21 +31,18 @@
 
   <div class="toolbar">
     <ul class="menu-list">
-      <li><a class="menu-button" href="" alt="Categorias">
+      <!-- <li><a class="menu-button" href="" alt="Categorias">
           <mat-icon color="accent">list</mat-icon>
+        </a></li> -->
+      <li><a disabled mat-button color="accent" class="menu-button" href="" alt="Buscar">
+          <mat-icon>search</mat-icon>
+          <span>Buscar</span>
         </a></li>
-      <li><a class="menu-button" href="" alt="Buscar">
-          <mat-icon color="accent">search</mat-icon>
+      <li><a mat-button color="accent" routerLink="Pedido" alt="Ver pedido">
+          <mat-icon>shopping_basket</mat-icon>
+          <span> Ver pedido </span>
         </a></li>
-      <li><a class="menu-button" routerLink="Pedido" alt="Pedido">
-          <mat-icon color="accent" matBadge="{{pedidoItems}}" matBadgeColor="warn" [matBadgeHidden]="pedidoItems==0">
-            shopping_basket
-            <span class="cdk-visually-hidden">
-              Ver Pedido: {{pedidoItems}} items
-            </span>
-          </mat-icon>
-        </a></li>
-      <li><a class="menu-button" href="" alt="Cuenta"><img src="assets/icons/icon-72x72.png" alt=""></a></li>
+      <!-- <li><a class="menu-button" href="" alt="Cuenta"><img src="assets/icons/icon-72x72.png" alt=""></a></li> -->
     </ul>
   </div>
 

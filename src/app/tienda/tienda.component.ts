@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Busqueda } from '../shared/clases/busqueda';
 import { Categoria } from '../shared/clases/categoria';
 import { Producto } from '../shared/clases/producto';
 import { ProductoVariedad } from '../shared/clases/producto-variedad';
@@ -19,6 +20,9 @@ export class TiendaComponent implements OnInit {
   public categorias: Categoria[] | undefined;
 
   public productos: Producto[] | undefined;
+  
+  public ultimaBusquedaProductos: Busqueda<Producto> | undefined;
+
   public productoSeleccionado: Producto | undefined;
   public variedadesProducto: ProductoVariedad[] | undefined;
 
@@ -65,11 +69,20 @@ export class TiendaComponent implements OnInit {
     });
   }
 
-
   cambiarCategoria(categoria: Categoria | undefined) {
     this.categoriaSeleccionada = categoria;
     this.productosSvc.obtenerProductos(5, 1, categoria).then(p => {
+      this.ultimaBusquedaProductos=p;
+      console.log(p);
       this.productos = p.resultadoBusqueda;
+    });
+  }
+
+  cargarMasProductos(){
+    this.productosSvc.obtenerProductos(5, this.ultimaBusquedaProductos!.pagina+1, this.categoriaSeleccionada).then(p => {
+      this.ultimaBusquedaProductos=p;
+      console.log(p);
+      this.productos= this.productos!.concat(p.resultadoBusqueda);
     });
   }
 
@@ -78,7 +91,6 @@ export class TiendaComponent implements OnInit {
       this.productoSeleccionado = producto!;
       this.productosSvc.variedadesProducto(producto).then(res => {
         this.variedadesProducto = res;
-        console.log(res);
       });
     } else {
       this.productoSeleccionado = undefined;
