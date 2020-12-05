@@ -46,7 +46,7 @@
 
 .toolbar {
     grid-row: 3/4;
-    background-color: #3a3a3a;
+    background-color: var(--text-primary-color);
     width: calc(100% + 2em);
     margin-left: -1em;
 }

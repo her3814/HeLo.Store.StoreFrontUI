@@ -1,5 +1,4 @@
-<h1 class="mat-h1">Pedido</h1>
-
+<p class="mat-h1">Pedido</p>
 
 <div *ngIf="!pedido || pedido!.items!.length == 0">
     <p class="mat-h2 text-center">Tu pedido está vacio. Entra a la tienda y busca alguna delicia para encargar 😜
@@ -58,6 +57,20 @@
             <ng-container *ngTemplateOutlet="datosContacto"></ng-container>
         </mat-expansion-panel>
 
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    <p style="font-weight: bold;">
+                        Medio de Pago
+                    </p>
+                </mat-panel-title>
+                <mat-panel-description>
+                    <mat-icon color="warn" *ngIf="formContacto.invalid">
+                        warning</mat-icon>
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+            <ng-container *ngTemplateOutlet="medioPago"></ng-container>
+        </mat-expansion-panel>
     </mat-accordion>
 </div>
 
@@ -214,4 +227,18 @@
             <mat-error *ngIf="email.hasError('email')">El correo informado no es válido.</mat-error>
         </mat-form-field>
     </form>
+</ng-template>
+
+<ng-template #medioPago>
+    <mat-button-toggle-group name="TipoPago" aria-label="Selección del medio de pago para el pedido"
+        class="text-uppercase">
+        <mat-button-toggle class="text-uppercase toggle-color-primary" value="bold">
+            <mat-icon>local_atm</mat-icon>
+            Efectivo
+        </mat-button-toggle>
+        <mat-button-toggle class="text-uppercase toggle-color-primary" value="bold">
+            <mat-icon>payment</mat-icon>
+            MercadoPago
+        </mat-button-toggle>
+    </mat-button-toggle-group>
 </ng-template>

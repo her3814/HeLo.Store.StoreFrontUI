@@ -3,7 +3,7 @@ export interface EnvioTipo {
     requiereDomicilio: Boolean;
     costo: number;
     tipo: EnvioTipos,
-    icon:string
+    icon: string
 }
 
 export enum EnvioTipos {
