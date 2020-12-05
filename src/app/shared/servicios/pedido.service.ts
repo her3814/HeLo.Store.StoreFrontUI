@@ -47,7 +47,9 @@ export class PedidoService {
     this._pedido.next({
       items: new Array<PedidoItem>(),
       direccionEntrega: undefined,
-      tipoEnvio: undefined
+      tipoEnvio: undefined,
+      observaciones: undefined,
+      datosCliente:undefined
     });
   }
 
@@ -156,7 +158,6 @@ export class PedidoService {
       pedido.direccionEntrega = direccion;
       this._pedido.next(pedido);
     }
-
   }
 
   enviarPedido() {
@@ -165,7 +166,7 @@ export class PedidoService {
     if (pedido) {
       var prods = new Array<string>();
       pedido.items.forEach(i => { if (!prods.find(k => k == i.itemCodigoProducto)) prods.push(i.itemCodigoProducto) });
-      var productosTexto: string = '';
+      var productosTexto: string = 'Hola! Te paso el pedido';
 
       prods.forEach(p => {
         var itemsProducto = pedido!.items.filter(i => i.itemCodigoProducto == p);

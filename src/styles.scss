@@ -1,14 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
 
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap");
 
-html, body { height: 100%; margin:0; padding:0; ;}
-body { 
-    margin: 0; 
-    padding:0; 
-     }
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+body {
+    margin: 0;
+    padding: 0;
+}
 
-     
 .popup {
     display: flex;
 
@@ -29,20 +33,20 @@ body {
         }
     }
 }
-.popup-bg{
+.popup-bg {
     width: 100vw;
     height: 100vh;
     top: 0;
     right: 0;
     position: fixed;
     z-index: 1;
-    background-color: rgba(247, 247, 247, 0.5); 
+    background-color: rgba(247, 247, 247, 0.5);
     backdrop-filter: blur(40px);
-	-webkit-filter: blur(3px);
-	filter: url(assets/blur.svg#blur);
+    -webkit-filter: blur(3px);
+    filter: url(assets/blur.svg#blur);
 }
 
-.popup-content{
+.popup-content {
     z-index: 2;
 }
 
@@ -59,33 +63,60 @@ body {
     border-radius: 0%;
 }
 
-.text-center{
+.text-center {
     text-align: center;
 }
 
-.text-right{
+.text-right {
     text-align: right;
 }
 
+.text-uppercase{
+    text-transform: uppercase!important;
+}
+
+.mat-button-toggle-checked {
+    font-weight: bold;
+}
+.mat-button-toggle-checked.toggle-color-primary {
+    background-color: var(--primary-color);
+    color: var(--text-primary-color);
+    font-weight: bold;
+}
+
+.mat-button-toggle-checked.toggle-color-accent {
+    background-color: var(--accent-color);
+    color: var(--text-accent-color);
+    font-weight: bold;
+}
+
+.mat-button-toggle-checked.toggle-color-warn {
+    background-color: var(--warn-color);
+    color: var(--text-warn-color);
+    font-weight: bold;
+}
 // Animaciones de animista.net
-.slide-top{-webkit-animation:slide-top .5s cubic-bezier(.25,.46,.45,.94) both;animation:slide-top .5s cubic-bezier(.25,.46,.45,.94) both}
+.slide-top {
+    -webkit-animation: slide-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    animation: slide-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
 @-webkit-keyframes slide-top {
     0% {
-      -webkit-transform: translateY(100px);
-              transform: translateY(100px);
+        -webkit-transform: translateY(100px);
+        transform: translateY(100px);
     }
     100% {
-      -webkit-transform: translateY(0);
-              transform: translateY(0);
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
     }
-  }
-  @keyframes slide-top {
+}
+@keyframes slide-top {
     0% {
-      -webkit-transform: translateY(100px);
-              transform: translateY(100px);
+        -webkit-transform: translateY(100px);
+        transform: translateY(100px);
     }
     100% {
-      -webkit-transform: translateY(0);
-              transform: translateY(0);
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
     }
-  }
+}

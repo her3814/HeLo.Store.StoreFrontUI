@@ -46,7 +46,7 @@
 <div class="popup popup-animated" [class.popup-active]="productoSeleccionado">
     <div class="popup-bg" routerLink="" [queryParams]="{producto : ''}" ></div>
     <div class="popup-content producto-popup">
-        <div class="producto-info">
+        <div class="producto-info alternative">
             <img src="{{productoSeleccionado?.imagenUrl}}" alt="Imagen {{productoSeleccionado?.nombre}}">
             <h1>{{productoSeleccionado?.nombre}}</h1>
             <p>{{productoSeleccionado?.descripcion}}</p>

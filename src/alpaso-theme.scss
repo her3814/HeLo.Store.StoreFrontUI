@@ -222,7 +222,7 @@ $altTheme: mat-light-theme($theme-primary, $theme-accent, $theme-warn);
 @include angular-material-theme($altTheme);
 
 .theme-alternate {
-  @include angular-material-theme($altTheme);
+  @include angular-material-theme($theme);
 }
 
 // Specific component overrides, pieces that are not in line with the general theming
